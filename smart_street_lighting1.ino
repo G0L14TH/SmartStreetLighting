@@ -1,36 +1,35 @@
-#define LDR A0       // LDR sensor connected to analog pin A0
-#define PIR 3        // PIR motion sensor connected to digital pin 3
-#define LED 12       // LED streetlight connected to digital pin 12
+#define LDR A0       
+#define PIR 3        
+#define LED 12       
 
-int ldrValue;        // variable to store light sensor reading
+int ldrValue;        
 int motion;          // variable to store motion sensor reading
 
 void setup() {
-  pinMode(LDR, INPUT);    // set LDR pin as input
-  pinMode(PIR, INPUT);    // set PIR pin as input
-  pinMode(LED, OUTPUT);   // set LED pin as output
-  Serial.begin(9600);     // start Serial Monitor for debugging
+  pinMode(LDR, INPUT);    
+  pinMode(PIR, INPUT);    
+  pinMode(LED, OUTPUT);   
+  Serial.begin(9600);     
 }
 
 void loop() {
   // read sensors
-  ldrValue = analogRead(LDR); // read light level (0–1023)
-  motion = digitalRead(PIR);  // read motion state (0 or 1)
-
+  ldrValue = analogRead(LDR); 
+  motion = digitalRead(PIR);  
   // print sensor readings
   Serial.print("LDR: "); Serial.print(ldrValue);
   Serial.print(" | PIR: "); Serial.println(motion);
 
-  // control LED based on conditions
-  if (ldrValue < 700) {        // it's dark
+  
+  if (ldrValue < 700) {        
     if (motion == HIGH) {
-      digitalWrite(LED, HIGH); // light ON when motion detected
+      digitalWrite(LED, HIGH);
     } else {
-      analogWrite(LED, 100);   // dim light when no motion
+      analogWrite(LED, 100);   
     }
   } else {
-    digitalWrite(LED, LOW);    // turn off light during daytime
+    digitalWrite(LED, LOW);   
   }
 
-  delay(500); // short delay for stability
+  delay(500); 
 }
